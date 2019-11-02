@@ -1,7 +1,5 @@
 {% extends "base.html" %}
-
 {% load static %}
-
 {% block container %}
 <div class="splash">
     <div class="pure-g-r">
@@ -44,16 +42,20 @@
 <div class="pure-g-r content-ribbon" id="contato">
     <div class="pure-u-1">
         <h3>Tire suas dúvidas sobre o Curso</h3>
-        <form class="pure-form pure-form-aligned" method="post">
+        {% if is_valid %}
+        <p>Mensagem enviada com sucesso!</p>
+        {% endif %}
+        <form action="#contato" class="pure-form pure-form-aligned" method="post">
+            {% csrf_token %}
             <fieldset>
-                { % for field in form %}
+                {% for field in form %}
                 <div class="pure-control-group">
                     {{ field.label_tag }}
                     {{ field }}
                     {% if field.errors %}
                     <ul class="errorlist">
-                        {% for erros in field.errors %}
-                        <li>{{ error }}</li>
+                        {% for error in field.errors %}
+                        <li>{{  error }}</li>
                         {% endfor %}
                     </ul>
                     {% endif %}

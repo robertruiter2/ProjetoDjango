@@ -22,8 +22,8 @@ class Course(models.Model):
 
     objects = CustomManager()
 
-    def __str__(self):
-        return self.name
-
     def get_absolute_url(self):
         return self.slug
+
+    def __str__(self):
+        return self.name
